@@ -1,0 +1,26 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.blog {
+  width: 1917px;
+  height: 100%;
+  background-color: white;
+  color: #000;
+}
+.navbar {
+  display: flex;
+  padding: 35px;
+  padding-left: 350px;
+  padding-right: 350px;
+  border: solid 1px #000000;
+  color: black;
+}
+.image {
+  margin-right: 118px;
+}
+.input {
+  margin-left: 21px;
+  border: solid 1px #000;
+}

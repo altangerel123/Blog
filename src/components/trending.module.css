@@ -1,0 +1,30 @@
+.trending {
+  width: 100%;
+  display: flex;
+}
+.card {
+  width: 289px;
+  /* height: 320px; */
+}
+.type {
+  font-size: 12px;
+  font-weight: 500;
+  border: solid 2px #000;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  color: white;
+  background-color: #4b6bfb;
+  width: fit-content;
+}
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.image {
+  width: 289px;
+  height: 320px;
+  border-radius: 10px;
+  position: relative;
+}
