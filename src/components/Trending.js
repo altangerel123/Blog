@@ -1,13 +1,51 @@
-import { useEffect, useState } from "react";
+"use client";
+
 import styles from "./trending.module.css";
-export default function Trending(props) {
+import { useEffect, useState } from "react";
+
+export default function Trending() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://dev.to/api/articles?top=5&per_page=4`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      });
+  }, []);
+
   return (
-    <div className={styles.card}>
-      <div className="gap-[16px]">
-        <p className={styles.type}>{props.technology}</p>
-        <h1 className={styles.title}>{props.title}</h1>
+    <div className="w-full flex justify-center">
+      <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
+        <h1 className="text-[24px] font-bold px-[350px]">Trending</h1>
+        <div className="flex gap-[20px] px-[350px]">
+          {posts.map((post) => {
+            return (
+              <div>
+                <TrendingCard
+                  img={post.cover_image}
+                  title={post.title}
+                  technology={post.type_of}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <img className={styles.image} src={props.img}></img>
     </div>
   );
 }
+
+const TrendingCard = (props) => {
+  return (
+    <div>
+      <div className={styles.card}>
+        <div className={styles.text}>
+          <p className={styles.type}>{props.technology}</p>
+          <h1 className={styles.title}>{props.title}</h1>
+        </div>
+        <img className={styles.image} src={props.img}></img>
+      </div>
+    </div>
+  );
+};

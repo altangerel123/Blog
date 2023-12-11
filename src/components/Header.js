@@ -8,9 +8,9 @@ export default function Header() {
         <div className={styles.navbar}>
           <img src="Logo (1).png" className={styles.image}></img>
           <div className="w-[667px] flex items-center gap-[40px] justify-center">
-            <p>Home</p>
-            <p>Blog</p>
-            <p>Contact</p>
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
           </div>
           <div className="flex relative">
             <input
