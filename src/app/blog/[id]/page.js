@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 export default function Allblogpost() {
   const { id } = useParams();
   const [post, setPost] = useState();
+  const [isloading, setIsloading] = useState(true);
   if (!id) return;
 
   useEffect(() => {
@@ -12,21 +13,27 @@ export default function Allblogpost() {
       .then((res) => res.json())
       .then((data) => {
         setPost(data);
+        setIsloading(false);
       });
   }, [id]);
 
   console.log(post);
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
-        <div className="px-[350px]">
+    <div className="w-full flex flex-col justify-center items-center bg-white">
+      {isloading && (
+        <div className="w-full h-[200px] flex items-center justify-center font-extrabold text-[30px]">
+          Loading...
+        </div>
+      )}
+      {!isloading && (
+        <>
           {post && <h1 className="font-semibold text-4xl">{post.title}</h1>}
           {post && <img className="" src={post.cover_image} />}
           {post && <p>{post.description}</p>}
           {post && <p>{post.published_timestamp}</p>}
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

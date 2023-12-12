@@ -15,22 +15,20 @@ export default function Trending() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
-        <h1 className="text-[24px] font-bold px-[350px]">Trending</h1>
-        <div className="flex gap-[20px] px-[350px]">
-          {posts.map((post) => {
-            return (
-              <div>
-                <TrendingCard
-                  img={post.cover_image}
-                  title={post.title}
-                  technology={post.type_of}
-                />
-              </div>
-            );
-          })}
-        </div>
+    <div className="w-full flex justify-center flex-col py-[100px] gap-[20px] bg-white">
+      <h1 className="text-[24px] font-bold px-[350px]">Trending</h1>
+      <div className="flex min-[390px]:gap-[30px] min-[390]:flex-col gap-[20px] px-[350px]">
+        {posts.map((post) => {
+          return (
+            <div>
+              <TrendingCard
+                img={post.cover_image}
+                title={post.title}
+                technology={post.type_of}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

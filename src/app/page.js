@@ -6,12 +6,11 @@ import Allblogpost from "@/components/Allblogpost";
 import { useState } from "react";
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
   return (
-    <>
+    <div className="w-[100%] h-[100%]">
       <Carousel />
       <Trending />
       <Allblogpost />
-    </>
+    </div>
   );
 }

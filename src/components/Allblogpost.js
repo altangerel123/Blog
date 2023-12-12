@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./allblogpost.module.css";
 import { getData } from "./function";
+import Link from "next/link";
 
 export default function Allblogpost() {
   const [posts, setPosts] = useState([]);
@@ -35,35 +36,36 @@ export default function Allblogpost() {
 
   return (
     <>
-      <div className="w-full flex justify-center">
-        <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
-          <h2 className="text-[24px] px-[350px] font-bold">All Blog Post</h2>
-          <div className="flex px-[350px] gap-[20px] text-[12px] font-bold justify-between">
-            <div className="flex gap-[20px] text-[12px] font-bold">
-              <button onClick={getCategory}>All</button>
-              <button onClick={getCategory}>Design</button>
-              <button onClick={getCategory}>Travel</button>
-              <button onClick={getCategory}>Fashion</button>
-              <button onClick={getCategory}>Trending</button>
-            </div>
-            <p>View All</p>
+      <div className="w-full px-[350px]  flex flex-col justify-center bg-white">
+        <h2 className="text-[24px] font-bold mb-[32px]">All Blog Post</h2>
+        <div className="flex text-[20px] font-bold justify-between mb-[32px]">
+          <div className="flex gap-[20px]">
+            <button onClick={getCategory}>All</button>
+            <button onClick={getCategory}>Design</button>
+            <button onClick={getCategory}>Travel</button>
+            <button onClick={getCategory}>Fashion</button>
+            <button onClick={getCategory}>Trending</button>
           </div>
-          <div className={styles.posts}>
-            {posts.map((post) => {
-              return (
-                <div>
+          <p>View All</p>
+        </div>
+        <div className={styles.posts}>
+          {posts.map((post) => {
+            return (
+              <div key={post.id}>
+                <Link href={`/blog/${post.id}`}>
                   <AllblogpostCard
                     img={post.cover_image}
                     title={post.title}
                     technology={post.type_of}
+                    timestamp={post.type_of}
                   />
-                </div>
-              );
-            })}
-          </div>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center bg-white">
         <button
           onClick={handleMore}
           className="mt-[100px] mb-[50px] px-[20px] rounded-[10px] border-[1px] py-[12px]"

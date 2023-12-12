@@ -4,56 +4,60 @@ import styles from "@/components/allblogpost.module.css";
 import Link from "next/link";
 export default function Allblogpost() {
   const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(12);
   const [isloading, setIsloading] = useState(true);
   useEffect(() => {
-    fetch(`https://dev.to/api/articles?top=12&per_page=12`)
+    fetch(`https://dev.to/api/articles?per_page=${page}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
         setIsloading(false);
       });
-  }, []);
+  }, [page]);
+
+  function handleMore() {
+    setPage(page + 3);
+  }
 
   return (
     <>
-      <div className="w-full flex justify-center">
-        <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
-          {isloading && (
-            <div className="px-[350px] font-extrabold text-[30px]">
-              Loading...
+      <div className="w-full flex flex-col px-[350px] justify-center bg-white">
+        {isloading && (
+          <div className="w-full h-[200px] flex items-center justify-center font-extrabold text-[30px]">
+            Loading...
+          </div>
+        )}
+        {!isloading && (
+          <>
+            <h2 className="text-[24px] font-bold my-[48px]">All Blog Post</h2>
+            <div className={styles.posts}>
+              {posts.map((post) => {
+                return (
+                  <div key={post.id}>
+                    <Link href={`/blog/${post.id}`}>
+                      <AllblogpostCard
+                        key={post.id}
+                        title={post.title}
+                        img={post.cover_image}
+                        technology={post.type_of}
+                        image={post.social_image}
+                        timestamp={post.published_timestamp}
+                      />
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
-          )}
-          {!isloading && (
-            <>
-              <h2 className="text-[24px] px-[350px] font-bold">
-                All Blog Post
-              </h2>
-              <div className={styles.posts}>
-                {posts.map((post) => {
-                  return (
-                    <div key={post.id}>
-                      <Link href={`/blog/${post.id}`}>
-                        <AllblogpostCard
-                          key={post.id}
-                          title={post.title}
-                          img={post.cover_image}
-                          technology={post.type_of}
-                          image={post.social_image}
-                          timestamp={post.published_timestamp}
-                        />
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-      <div className="w-full flex justify-center">
-        <p className="mt-[100px] mb-[50px] px-[20px] rounded-[10px] border-[1px] py-[12px]">
-          Load More
-        </p>
+            <div className="w-full flex justify-center">
+              <button
+                onClick={handleMore}
+                className="mt-[100px] mb-[50px] px-[20px] rounded-[10px] border-[1px] py-[12px]"
+              >
+                Load More
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

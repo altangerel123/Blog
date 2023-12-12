@@ -7,29 +7,25 @@ export default function Carousel() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://dev.to/api/articles?top=9&per_page=9`)
+    fetch(`https://dev.to/api/articles?top=1&per_page=1`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
       });
   }, []);
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-[1917px] flex flex-col gap-[30px] bg-white">
-        <div className="flex px-[350px] gap-[1000px] mt-[100px]">
-          {posts.map((post) => {
-            return (
-              <div>
-                <CarouselCard
-                  img={post.cover_image}
-                  title={post.title}
-                  technology={post.type_of}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <div className="w-full min-[390px]:flex px-[350px] bg-white pt-[100px] hidden">
+      {posts.map((post) => {
+        return (
+          <div>
+            <CarouselCard
+              img={post.cover_image}
+              title={post.title}
+              technology={post.type_of}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
