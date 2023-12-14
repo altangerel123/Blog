@@ -20,7 +20,7 @@ export default function Allblogpost() {
   console.log(post);
 
   return (
-    <div className="w-full flex flex-col justify-center items-center bg-white">
+    <div className="w-full flex flex-col justify-center items-center bg-white pt-[100px]">
       {isloading && (
         <div className="w-full h-[200px] flex items-center justify-center font-extrabold text-[30px]">
           Loading...

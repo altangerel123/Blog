@@ -6,14 +6,14 @@ import Link from "next/link";
 
 export default function Allblogpost() {
   const [posts, setPosts] = useState([]);
-  const [pages, setPages] = useState(3);
+  const [pages, setPages] = useState(6);
   const [error, setError] = useState("");
   const [category, setCategory] = useState("all");
 
   const getBlogs = async () => {
     try {
       const data = await getData(
-        `https://dev.to/api/articles?per_page=${pages}&tag=${category}`
+        `https://dev.to/api/articles?&per_page=${pages}&tag=${category}`
       );
       console.log(data);
       setPosts(data);
@@ -36,17 +36,17 @@ export default function Allblogpost() {
 
   return (
     <>
-      <div className="w-full px-[350px]  flex flex-col justify-center bg-white">
+      <div className="w-full  flex flex-col justify-center bg-white">
         <h2 className="text-[24px] font-bold mb-[32px]">All Blog Post</h2>
         <div className="flex text-[20px] font-bold justify-between mb-[32px]">
           <div className="flex gap-[20px]">
-            <button onClick={getCategory}>All</button>
+            <button onClick={getCategory}>All</button>,
             <button onClick={getCategory}>Design</button>
             <button onClick={getCategory}>Travel</button>
             <button onClick={getCategory}>Fashion</button>
             <button onClick={getCategory}>Trending</button>
           </div>
-          <p>View All</p>
+          <p onClick={setCategory}>View All</p>
         </div>
         <div className={styles.posts}>
           {posts.map((post) => {

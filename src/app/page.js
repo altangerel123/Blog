@@ -7,10 +7,12 @@ import { useState } from "react";
 
 export default function Home() {
   return (
-    <div className="w-[100%] h-[100%]">
-      <Carousel />
-      <Trending />
-      <Allblogpost />
+    <div className="w-full flex justify-center bg-white">
+      <div className="max-w-[1917px]  h-[100%]">
+        <Carousel />
+        <Trending />
+        <Allblogpost />
+      </div>
     </div>
   );
 }

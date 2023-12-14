@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import styles from "./trending.module.css";
 import { useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ export default function Trending() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch(`https://dev.to/api/articles?top=5&per_page=4`)
+    fetch(`https://dev.to/api/articles?top=10000&per_page=4`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
@@ -15,17 +16,19 @@ export default function Trending() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center flex-col py-[100px] gap-[20px] bg-white">
-      <h1 className="text-[24px] font-bold px-[350px]">Trending</h1>
-      <div className="flex min-[390px]:gap-[30px] min-[390]:flex-col gap-[20px] px-[350px]">
+    <div className="flex justify-center flex-col py-[100px] gap-[20px] bg-white">
+      <h1 className="text-[24px] font-bold">Trending</h1>
+      <div className="grid sm:grid-cols-4 grid-cols-1 gap-[30px]">
         {posts.map((post) => {
           return (
-            <div>
-              <TrendingCard
-                img={post.cover_image}
-                title={post.title}
-                technology={post.type_of}
-              />
+            <div key={post.id}>
+              <Link href={`/blog/${post.id}`}>
+                <TrendingCard
+                  img={post.cover_image}
+                  title={post.title}
+                  technology={post.type_of}
+                />
+              </Link>
             </div>
           );
         })}

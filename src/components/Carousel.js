@@ -1,38 +1,102 @@
 "use client";
-
-import styles from "./carousel.module.css";
 import { useEffect, useState } from "react";
+import styles from "./carousel.module.css";
+import Link from "next/link";
 
-export default function Carousel() {
+export default function HomePage() {
   const [posts, setPosts] = useState([]);
+  const [pages, setPages] = useState(3);
+  const [carouselIndex, setCarouselIndex] = useState(1);
+  const [withTransition, setWithTransition] = useState(true);
+  const [isOnTransition, setIsOnTransition] = useState(false);
 
   useEffect(() => {
-    fetch(`https://dev.to/api/articles?top=1&per_page=1`)
+    fetch(`https://dev.to/api/articles?top=10000&per_page=${pages}`)
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);
       });
   }, []);
+
   return (
-    <div className="w-full min-[390px]:flex px-[350px] bg-white pt-[100px] hidden">
-      {posts.map((post) => {
-        return (
-          <div>
-            <CarouselCard
-              img={post.cover_image}
-              title={post.title}
-              technology={post.type_of}
-            />
-          </div>
-        );
-      })}
+    <div className="bg-white">
+      <div className="sm:block hidden max-w-[1917px] m-auto overflow-hidden pt-[100px] ">
+        <div
+          className="w-[600%] m-auto flex "
+          onTransitionStart={() => {
+            setIsOnTransition(true);
+          }}
+          onTransitionEnd={() => {
+            if (carouselIndex === 4) {
+              setCarouselIndex(1);
+              setWithTransition(false);
+            }
+            if (carouselIndex === 0) {
+              setCarouselIndex(3);
+              setWithTransition(false);
+            }
+            setIsOnTransition(false);
+          }}
+          style={{
+            transform: `translateX(-${(100 * carouselIndex) / 6}%)`,
+            transition: withTransition ? "300ms" : "none",
+          }}
+        >
+          {posts.map((home) => (
+            <div key={home.id}>
+              <Link href={`/${home.id}`}>
+                <CarouselCard
+                  img={home.cover_image}
+                  {...home}
+                  date={home.readable_publish_date}
+                />
+              </Link>
+            </div>
+          ))}
+          {posts.map((home) => (
+            <div key={home.id}>
+              <Link href={`/${home.id}`}>
+                <CarouselCard
+                  img={home.cover_image}
+                  {...home}
+                  date={home.readable_publish_date}
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3 justify-end pt-[30px]">
+          <button
+            className="border-[1px] border-[#000] px-[10px] py-[5px] rounded-[5px]"
+            onClick={() => {
+              if (isOnTransition) return;
+              setCarouselIndex((prev) => prev - 1);
+              setWithTransition(true);
+              setIsOnTransition(true);
+            }}
+          >
+            Previous
+          </button>
+          <button
+            className="border-[1px] border-[#000] px-[10px] py-[5px] rounded-[5px]"
+            onClick={() => {
+              if (isOnTransition) return;
+              setCarouselIndex((prev) => prev + 1);
+              setWithTransition(true);
+              setIsOnTransition(true);
+            }}
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
 
 const CarouselCard = (props) => {
   return (
-    <div>
+    <>
       <div className={styles.card1}>
         <div className={styles.section}>
           <div className={styles.text1}>
@@ -42,14 +106,6 @@ const CarouselCard = (props) => {
         </div>
         <img className={styles.image1} src={props.img} />
       </div>
-      <div className="flex gap-[10px] w-full justify-end mt-[20px]">
-        <button className="border-2 border-black px-[15px] py-[5px] rounded-[10px]">
-          Left
-        </button>
-        <button className="border-2 border-black px-[15px] py-[5px] rounded-[10px]">
-          Right
-        </button>
-      </div>
-    </div>
+    </>
   );
 };

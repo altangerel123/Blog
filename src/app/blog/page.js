@@ -21,7 +21,7 @@ export default function Allblogpost() {
 
   return (
     <>
-      <div className="w-full flex flex-col px-[350px] justify-center bg-white">
+      <div className="w-full flex flex-col justify-center bg-white">
         {isloading && (
           <div className="w-full h-[200px] flex items-center justify-center font-extrabold text-[30px]">
             Loading...

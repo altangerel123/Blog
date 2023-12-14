@@ -1,8 +1,8 @@
 "use client";
 export default function Footer() {
   return (
-    <div className="w-full   pt-[64px] bg-white">
-      <div className="flex justify-between gap-[20px] mb-[25px] px-[352px]">
+    <div className="w-full pt-[64px] bg-white">
+      <div className="flex justify-between gap-[20px] mb-[25px]">
         <div className="gap-[12px] w-[290px]">
           <h1 className="text-[18px] font-semibold">About</h1>
           <p>
@@ -29,7 +29,7 @@ export default function Footer() {
           <img src="in.png" className="w-[20px] h-[20px]"></img>
         </div>
       </div>
-      <div className="px-[352px] py-[32px] flex justify-between gap-[64px]">
+      <div className=" py-[32px] flex justify-between gap-[64px]">
         <div className="flex">
           <img src="Logo (2).png"></img>
           <div>
