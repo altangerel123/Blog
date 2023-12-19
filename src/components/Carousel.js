@@ -75,7 +75,7 @@ export default function HomePage() {
               setIsOnTransition(true);
             }}
           >
-            Previous
+            {"<"}
           </button>
           <button
             className="border-[1px] border-[#000] px-[10px] py-[5px] rounded-[5px]"
@@ -86,7 +86,7 @@ export default function HomePage() {
               setIsOnTransition(true);
             }}
           >
-            Next
+            {">"}
           </button>
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function Allblogpost() {
         <h2 className="text-[24px] font-bold mb-[32px]">All Blog Post</h2>
         <div className="flex text-[20px] font-bold justify-between mb-[32px]">
           <div className="flex gap-[20px]">
-            <button onClick={getCategory}>All</button>,
+            <button onClick={getCategory}>All</button>
             <button onClick={getCategory}>Design</button>
             <button onClick={getCategory}>Travel</button>
             <button onClick={getCategory}>Fashion</button>
