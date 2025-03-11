@@ -1,8 +1,15 @@
-"use client";
-
 import Carousel from "@/components/Carousel";
 import Trending from "@/components/Trending";
 import Allblogpost from "@/components/Allblogpost";
+
+export const metadata = {
+  title: "Blog",
+  description: "Blog",
+  openGraph: {
+    title: "Blog",
+    description: "Blog",
+  },
+};
 
 export default function Home() {
   return (
