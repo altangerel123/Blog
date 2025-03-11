@@ -1,26 +1,22 @@
-import { useContext, useState } from "react";
-
-import { Searchh } from "@/app/layout";
-
+"use client";
+import { SearchAll } from "@/app/layout";
+import { useContext } from "react";
 
 export function Search() {
-  const { searchValue, setSearchValue, blogs } = useContext(Searchh);
-
-  const inputHandler = (event) => {
-    setSearchValue(event.target.value);
+  const { searchValue, setSearchValue } = useContext(SearchAll);
+  const inputHandler = (e) => {
+    setSearchValue(e.target.value);
+    console.log(e.target.value);
   };
-
   return (
     <div className="relative">
-      <div className="md:flex md:justify-center md:items-center bg-[#F4F4F5] gap-[12px] md:pl-4 md:pt-2 md:pr-2 md:pb-2 md:w-[166px] h-[36px] md:mr-[50px]">
-        <input
-          className="text-black bg-[#F4F4F5]  md:w-[114px] md:h-[36px] border-0"
-          input="text"
-          placeholder="Search"
-          onChange={inputHandler}
-          value={searchValue}
-        ></input>
-      </div>
+      <input
+        className="text-black bg-[#F4F4F5] p-[10px]  mx:w-[114px] md:h-[36px] rounded-[10px]]"
+        input="text"
+        placeholder="Search"
+        onChange={inputHandler}
+        value={searchValue}
+      ></input>
     </div>
   );
 }

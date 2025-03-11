@@ -20,7 +20,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-white">
-      <div className="sm:block hidden max-w-[1917px] m-auto overflow-hidden pt-[100px] ">
+      <div className="sm:block hidden max-w-[1917px] m-auto overflow-hidden ">
         <div
           className="w-[600%] m-auto flex "
           onTransitionStart={() => {
@@ -65,9 +65,9 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <div className="flex gap-3 justify-end pt-[30px]">
+        <div className="flex gap-3 justify-center pt-[30px]">
           <button
-            className="border-[1px] border-[#000] px-[10px] py-[5px] rounded-[5px]"
+            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
             onClick={() => {
               if (isOnTransition) return;
               setCarouselIndex((prev) => prev - 1);
@@ -78,7 +78,7 @@ export default function HomePage() {
             {"<"}
           </button>
           <button
-            className="border-[1px] border-[#000] px-[10px] py-[5px] rounded-[5px]"
+            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
             onClick={() => {
               if (isOnTransition) return;
               setCarouselIndex((prev) => prev + 1);
