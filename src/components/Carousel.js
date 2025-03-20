@@ -1,111 +1,106 @@
-"use client";
-import { useEffect, useState } from "react";
-import styles from "./carousel.module.css";
-import Link from "next/link";
+import React, { useRef } from "react";
 
-export default function HomePage() {
-  const [posts, setPosts] = useState([]);
-  const [pages, setPages] = useState(3);
-  const [carouselIndex, setCarouselIndex] = useState(1);
-  const [withTransition, setWithTransition] = useState(true);
-  const [isOnTransition, setIsOnTransition] = useState(false);
+import { Swiper, SwiperSlide } from "swiper/react";
 
-  useEffect(() => {
-    fetch(`https://dev.to/api/articles?top=10000&per_page=${pages}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      });
-  }, []);
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
+import {
+  Autoplay,
+  Pagination,
+  Navigation,
+  EffectCoverflow,
+} from "swiper/modules";
+
+export default function Carousel() {
+  const progressCircle = useRef(null);
+  const onAutoplayTimeLeft = (progress) => {
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
+  };
+  const posts = [
+    { image: "img1.jpg" },
+    { image: "img2.jpg" },
+    { image: "img3.jpg" },
+    { image: "img4.jpg" },
+    { image: "img5.jpg" },
+    { image: "img6.jpg" },
+    { image: "img7.jpg" },
+  ];
   return (
-    <div className="bg-white">
-      <div className="sm:block hidden max-w-[1917px] m-auto overflow-hidden ">
-        <div
-          className="w-[600%] m-auto flex "
-          onTransitionStart={() => {
-            setIsOnTransition(true);
-          }}
-          onTransitionEnd={() => {
-            if (carouselIndex === 4) {
-              setCarouselIndex(1);
-              setWithTransition(false);
-            }
-            if (carouselIndex === 0) {
-              setCarouselIndex(3);
-              setWithTransition(false);
-            }
-            setIsOnTransition(false);
-          }}
-          style={{
-            transform: `translateX(-${(100 * carouselIndex) / 6}%)`,
-            transition: withTransition ? "300ms" : "none",
-          }}
-        >
-          {posts.map((home) => (
-            <div key={home.id}>
-              <Link href={`/${home.id}`}>
-                <CarouselCard
-                  img={home.cover_image}
-                  {...home}
-                  date={home.readable_publish_date}
+    <div className="bg-blue-950 rounded-3xl">
+      <Swiper
+        effect={"coverflow"}
+        slidesPerView={1}
+        coverflowEffect={{
+          rotate: 45,
+          stretch: 50,
+          depth: 20,
+          modifier: 1,
+          slideShadows: true,
+          usetransform: true,
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        }}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
+        onAutoplayTimeLeft={onAutoplayTimeLeft}
+        className="mt-[50px] pt-[50px]"
+      >
+        {posts.map((index) => (
+          <SwiperSlide className="w-[250px] h-[800px] rounded-3xl  mt-[50px] border-[1px]">
+            <div className="p-5 bg-white rounded-t-3xl">
+              <div className="flex gap-2 ">
+                <img
+                  className="w-[50px] h-[50px] rounded-full"
+                  src="Logo.png"
                 />
-              </Link>
+                <div>
+                  <h1>Oyu Tolgoi LLC</h1>
+                  <p>March 7</p>
+                </div>
+              </div>
+              <p>
+                Та бүхэндээ ирж буй XVII жарны "Элдэв эрдэнэт" хэмээгч модон
+                могой жилийн сар шинийн мэндийг өргөн дэвшүүлье!
+              </p>
             </div>
-          ))}
-          {posts.map((home) => (
-            <div key={home.id}>
-              <Link href={`/${home.id}`}>
-                <CarouselCard
-                  img={home.cover_image}
-                  {...home}
-                  date={home.readable_publish_date}
-                />
-              </Link>
+            <img className="w-full h-[200px]" src={index.image} />
+            <div className="flex justify-between p-5 rounded-b-3xl bg-white">
+              <div className="flex justify-center items-center">
+                <img className="w-[20px] h-[20px]" src="heart.png" />
+                <p>23</p>
+              </div>
+              <div className="flex">
+                <img className="w-[20px] h-[20px]" src="share.png" />
+                <p>Share</p>
+              </div>
             </div>
-          ))}
+          </SwiperSlide>
+        ))}
+        <div className="h-[80px]" slot="container-end">
+          <svg ref={progressCircle}></svg>
         </div>
-        <div className="flex gap-3 justify-center pt-[30px]">
-          <button
-            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
-            onClick={() => {
-              if (isOnTransition) return;
-              setCarouselIndex((prev) => prev - 1);
-              setWithTransition(true);
-              setIsOnTransition(true);
-            }}
-          >
-            {"<"}
-          </button>
-          <button
-            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
-            onClick={() => {
-              if (isOnTransition) return;
-              setCarouselIndex((prev) => prev + 1);
-              setWithTransition(true);
-              setIsOnTransition(true);
-            }}
-          >
-            {">"}
-          </button>
-        </div>
-      </div>
+      </Swiper>
     </div>
   );
 }
-
-const CarouselCard = (props) => {
-  return (
-    <>
-      <div className={styles.card1}>
-        <div className={styles.section}>
-          <div className={styles.text1}>
-            <p className={styles.type1}>{props.technology}</p>
-            <h1 className={styles.title1}>{props.title}</h1>
-          </div>
-        </div>
-        <img className={styles.image1} src={props.img} />
-      </div>
-    </>
-  );
-};
