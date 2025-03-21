@@ -6,9 +6,9 @@ export default function Allblogpost() {
   const { id } = useParams();
   const [post, setPost] = useState();
   const [isloading, setIsloading] = useState(true);
-  if (!id) return;
 
   useEffect(() => {
+    if (!id) return;
     fetch(`https://dev.to/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => {
@@ -16,8 +16,6 @@ export default function Allblogpost() {
         setIsloading(false);
       });
   }, [id]);
-
-  console.log(post);
 
   return (
     <div className="w-full flex flex-col justify-center items-center bg-white pt-[100px]">
