@@ -16,7 +16,7 @@ export default function Trending() {
   }, []);
 
   return (
-    <div className="flex justify-center flex-col py-[100px] gap-[20px] bg-white">
+    <div className="flex justify-center flex-col py-[20px] gap-[20px] bg-white">
       <h1 className="text-[24px] font-bold">Trending</h1>
       <div className="grid sm:grid-cols-4 grid-cols-1 gap-[30px]">
         {posts.map((post) => {

@@ -10,8 +10,7 @@ export const SearchAll = createContext();
 export const useSearch = () => useContext(SearchAll);
 
 export default function RootLayout({ children }) {
-  const [Value, setValue] = useState("");
-
+  const [value, setValue] = useState("");
   const [blogs, setBlogs] = useState([]);
   const [pages, setPages] = useState(1);
 
@@ -26,7 +25,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="w-full flex justify-center bg-white">
-        <SearchAll.Provider value={{ Value, setValue, blogs, setBlogs }}>
+        <SearchAll.Provider value={{ value, setValue, blogs, setBlogs }}>
           <div className="w-[1500px]">
             <Header />
             {children}

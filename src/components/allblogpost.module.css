@@ -27,8 +27,8 @@
   border-radius: 10px;
   margin-bottom: 16px;
 }
-.img:hover {
-  border: solid 5px red;
+.cards:hover {
+  border: solid 5px black;
 }
 .article {
   border: solid 1px #4b6bfb0d;

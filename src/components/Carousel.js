@@ -65,9 +65,9 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <div className="flex gap-3 justify-center pt-[30px]">
+        <div className="flex gap-5 justify-end m-7">
           <button
-            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
+            className="border-[1px] border-[#000] p-[20px] rounded-[100%] hover:bg-black hover:text-white"
             onClick={() => {
               if (isOnTransition) return;
               setCarouselIndex((prev) => prev - 1);
@@ -78,7 +78,7 @@ export default function HomePage() {
             {"<"}
           </button>
           <button
-            className="border-[1px] border-[#000] px-[20px] py-[5px] rounded-[5px]"
+            className="border-[1px] border-[#000] p-[20px] rounded-[100%] hover:bg-black hover:text-white"
             onClick={() => {
               if (isOnTransition) return;
               setCarouselIndex((prev) => prev + 1);
@@ -100,8 +100,8 @@ const CarouselCard = (props) => {
       <div className={styles.card1}>
         <div className={styles.section}>
           <div className={styles.text1}>
-            <p className={styles.type1}>{props.technology}</p>
             <h1 className={styles.title1}>{props.title}</h1>
+            <p className={styles.type1}>{props.technology}</p>
           </div>
         </div>
         <img className={styles.image1} src={props.img} />

@@ -1,7 +1,7 @@
 "use client";
 export default function Footer() {
   return (
-    <div className="w-full pt-[64px] bg-white">
+    <div className="w-full pt-[64px] border-t-2 border-black">
       <div className="flex justify-between gap-[20px] mb-[25px]">
         <div className="gap-[12px] w-[290px]">
           <h1 className="text-[18px] font-semibold">About</h1>
@@ -17,10 +17,25 @@ export default function Footer() {
             <h2 className="text-[16px] font-normal">Phone : 880 123 456 789</h2>
           </div>
         </div>
-        <div className=" flex flex-col  items-center gap-[8px]">
-          <a href="/">Home</a>
-          <a href="/blog">Blog</a>
-          <a href="/contact">Contact</a>
+        <div className=" flex flex-row  items-center gap-[30px]">
+          <a
+            className="text-[20px] font-medium p-2 hover:bg-black hover:text-white rounded-2xl"
+            href="/"
+          >
+            Home
+          </a>
+          <a
+            className="text-[20px] font-medium p-2 hover:bg-black hover:text-white rounded-2xl"
+            href="/blog"
+          >
+            Blog
+          </a>
+          <a
+            className="text-[20px] font-medium p-2 hover:bg-black hover:text-white rounded-2xl"
+            href="/contact"
+          >
+            Contact
+          </a>
         </div>
         <div className="flex gap-[20px]">
           <img src="facebook.png" className="w-[20px] h-[20px]"></img>

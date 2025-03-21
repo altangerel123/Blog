@@ -8,9 +8,15 @@ export default function Header() {
       <img src="Logo (1).png"></img>
       <div className=" gap-[100px] sm:flex hidden">
         <div className="flex items-center gap-[40px] justify-center">
-          <a href="/">Home</a>
-          <a href="/blog">Blog</a>
-          <a href="/contact">Contact</a>
+          <a className="text-[20px] font-medium" href="/">
+            Home
+          </a>
+          <a className="text-[20px] font-medium" href="/blog">
+            Blog
+          </a>
+          <a className="text-[20px] font-medium" href="/contact">
+            Contact
+          </a>
         </div>
         <div className="flex relative justify-end items-end">
           <Search />

@@ -68,7 +68,7 @@ export default function Allblogpost() {
       <div className="w-full flex justify-center bg-white">
         <button
           onClick={handleMore}
-          className="mt-[100px] mb-[50px] px-[20px] rounded-[10px] border-[1px] py-[12px]"
+          className="mt-[100px] mb-[50px] px-[20px] rounded-[10px] border-[1px] py-[12px] hover:bg-black hover:text-white"
         >
           Load More
         </button>
